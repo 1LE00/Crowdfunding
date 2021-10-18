@@ -92,7 +92,7 @@ body{
         height: 0;
         z-index: 10;
         transition: height 0.2s ease-in, box-shadow 0.15s ease-in;
-        transition-delay: 0.1s, 0.3s;
+        transition-delay: 0.1s, 0.8s;
     }
 
     header .show-menu{
