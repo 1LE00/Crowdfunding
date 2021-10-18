@@ -1,3 +1,6 @@
+
+const body = document.getElementsByTagName("body")[0];
+
 const hamburger = document.getElementsByClassName("hamburger")[0];
 
 const menu = document.getElementsByClassName("menu")[0];
@@ -8,6 +11,8 @@ hamburger.addEventListener("click", handler, true );
 function handler(){
     hamburger.classList.toggle("menu-close");
     menu.classList.toggle("show-menu");
+    body.classList.toggle("fixed");
+    body.removeAttribute("style");
 }
 //bookmark icon change
 const bookmarkButton = document.getElementById("bookmark-button");
@@ -111,41 +116,41 @@ function selectRadio(){
                 // console.log("NO  radio button found");
             }
             //window scroll
-            var x = screen.height;
-            if(event.target.matches("#no-reward")){
+            // var x = screen.height;
+            // if(event.target.matches("#no-reward")){
                 
-                var y = event.clientY;                
-                if((x-y) > 500){
-                    window.scrollBy(0,-200);
-                }
-                else{
-                    window.scrollBy(0,100);
+            //     var y = event.clientY;                
+            //     if((x-y) > 500){
+            //         window.scrollBy(0,-200);
+            //     }
+            //     else{
+            //         window.scrollBy(0,100);
                     
-                }
-            }
+            //     }
+            // }
 
-            else if(event.target.matches("#bamboo")){
+            // else if(event.target.matches("#bamboo")){
                 
-                var y = event.clientY;
-                if(x > y){
-                    if ((x-y) > 100 && (x-y) < 449) {
-                        window.scrollBy(0, 220);
-                    }
-                    else if((x-y) > 450){                        
-                        window.scrollBy(0,-200);
-                    }  
-                }
-            }
-            else if(event.target.matches("#black")){
-                var y = event.clientY;              
-                if((x-y) < 350){
-                    window.scrollBy(0,220);                
-                }
-                else{
-                    window.scrollBy(0,-100);
+            //     var y = event.clientY;
+            //     if(x > y){
+            //         if ((x-y) > 100 && (x-y) < 449) {
+            //             window.scrollBy(0, 220);
+            //         }
+            //         else if((x-y) > 450){                        
+            //             window.scrollBy(0,-200);
+            //         }  
+            //     }
+            // }
+            // else if(event.target.matches("#black")){
+            //     var y = event.clientY;              
+            //     if((x-y) < 350){
+            //         window.scrollBy(0,220);                
+            //     }
+            //     else{
+            //         window.scrollBy(0,-100);
                  
-                }
-            }        
+            //     }
+            // }        
         });
     }
     goSuccess();
@@ -156,12 +161,14 @@ function goSuccess(){
     for (let button = 0; button < buttons.length; button++) {
         const btn = buttons[button];
         const success = document.getElementsByClassName("success")[0];
-        const body = document.getElementsByTagName("body")[0];
 
         btn.addEventListener("click", function(){
             modal.classList.remove("modal");
+            success.classList.remove("success-hide");
+            setTimeout(() => {
+                success.classList.add("success-show");
+            }, 100);
             
-            success.classList.add("success-show");
             window.scrollTo(0,0);
             
             body.style.maxHeight="100vh";
@@ -182,7 +189,10 @@ function goSuccess(){
 
         const toBody = document.getElementById("bsuccess");
         toBody.addEventListener("click", function(){
-            success.classList.remove("success-show");
+            success.classList.add("success-hide");
+            setTimeout(() => {
+                success.classList.remove("success-show");    
+            }, 1000);
             backProject.classList.remove("back-project");
             body.style.maxHeight="100%";
             body.style.overflow="visible";
@@ -270,11 +280,23 @@ window.onclick = function(event){
         if(menu.classList.contains("show-menu")){
             menu.classList.remove("show-menu");
             hamburger.classList.remove("menu-close");
+            body.classList.remove("fixed");
         }
     }
     
     if(event.target.matches(".hamburger")){
         modal.classList.remove("modal");
         backProject.classList.remove("back-project");
+        const check = document.getElementsByName("check");
+            for (let index = 0; index < check.length-1; index++) {
+                const element = check[index];
+                element.checked = false;
+
+                const stands = document.getElementsByClassName("stand");   
+                stands[index].classList.remove("border");
+
+                const start = document.getElementsByClassName("start"); 
+                start[index].classList.remove("start-show");
+           }
     }  
 }
