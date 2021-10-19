@@ -14,6 +14,7 @@ function handler(){
     body.classList.toggle("fixed");
     body.removeAttribute("style");
 }
+
 //bookmark icon change
 const bookmarkButton = document.getElementById("bookmark-button");
 
@@ -21,11 +22,36 @@ const bookmarkIcon = document.getElementById("bookmark-icon");
 
 const bookmarkLabel = document.getElementById("bookmark-label");
 
+const bookmark = document.getElementById("bookmark");
+
 bookmarkButton.addEventListener("click", function(event){
     bookmarkIcon.firstElementChild.classList.toggle("click-circle");
     bookmarkIcon.lastElementChild.classList.toggle("click-path");
-    bookmarkLabel.classList.toggle("bookmark-label");
+    bookmark.classList.toggle("add");
+    if (screen.width < 1024) {
+        bookmarkLabel.classList.toggle("bookmark-label");    
+    }  
+    if (bookmark.matches(".add")) {
+        bookmarkButton.addEventListener("mouseenter", function(){
+            bookmarkIcon.firstElementChild.classList.remove("hover-circle");
+        });
+    }
+    else{
+        bookmarkButton.addEventListener("mouseenter", function(){
+            bookmarkIcon.firstElementChild.classList.add("hover-circle");
+        });
+    }  
 });
+
+if (screen.width >= 1024) {
+    bookmarkButton.addEventListener("mouseenter", function(){
+        bookmarkIcon.firstElementChild.classList.add("hover-circle");
+    });
+
+    bookmarkButton.addEventListener("mouseleave", function(){
+        bookmarkIcon.firstElementChild.classList.remove("hover-circle");
+    });    
+}
 
 //backproject change and modal pop up 
 const backProject = document.getElementById("back-project");
@@ -33,7 +59,9 @@ const backProject = document.getElementById("back-project");
 const modal = document.getElementById("modal");
 
 backProject.addEventListener("click", function(){
-    backProject.classList.add("back-project");
+    if (screen.width < 1024) {
+        backProject.classList.add("back-project");    
+    }
     modal.classList.add("modal");
     window.scrollTo(0,0);
     selectRadio();
@@ -114,43 +142,7 @@ function selectRadio(){
                 }                                                 
             } catch (Typeerror) {
                 // console.log("NO  radio button found");
-            }
-            //window scroll
-            // var x = screen.height;
-            // if(event.target.matches("#no-reward")){
-                
-            //     var y = event.clientY;                
-            //     if((x-y) > 500){
-            //         window.scrollBy(0,-200);
-            //     }
-            //     else{
-            //         window.scrollBy(0,100);
-                    
-            //     }
-            // }
-
-            // else if(event.target.matches("#bamboo")){
-                
-            //     var y = event.clientY;
-            //     if(x > y){
-            //         if ((x-y) > 100 && (x-y) < 449) {
-            //             window.scrollBy(0, 220);
-            //         }
-            //         else if((x-y) > 450){                        
-            //             window.scrollBy(0,-200);
-            //         }  
-            //     }
-            // }
-            // else if(event.target.matches("#black")){
-            //     var y = event.clientY;              
-            //     if((x-y) < 350){
-            //         window.scrollBy(0,220);                
-            //     }
-            //     else{
-            //         window.scrollBy(0,-100);
-                 
-            //     }
-            // }        
+            }       
         });
     }
     goSuccess();
@@ -299,4 +291,44 @@ window.onclick = function(event){
                 start[index].classList.remove("start-show");
            }
     }  
+}
+
+
+const circle = document.getElementById("circle");
+
+if(screen.width >= 600 && screen.width < 768){
+    circle.setAttribute("cx", "40");
+    circle.setAttribute("cy", "40");
+    circle.setAttribute("r", "40");
+}
+else if (screen.width >=768 && screen.width <1024){
+    circle.setAttribute("cx", "50");
+    circle.setAttribute("cy", "50");
+    circle.setAttribute("r", "50");
+}
+else if (screen.width >=1100 && screen.width < 1200){
+    circle.setAttribute("cx", "30");
+    circle.setAttribute("cy", "30");
+    circle.setAttribute("r", "30");
+}
+else if (screen.width >=1200 && screen.width < 1400){
+    circle.setAttribute("cx", "35");
+    circle.setAttribute("cy", "35");
+    circle.setAttribute("r", "35");
+}
+else if (screen.width >=1400 && screen.width < 1536){
+    circle.setAttribute("cx", "32");
+    circle.setAttribute("cy", "32");
+    circle.setAttribute("r", "32");
+}
+else if (screen.width >= 1536){
+    circle.setAttribute("cx", "33.5");
+    circle.setAttribute("cy", "33.5");
+    circle.setAttribute("r", "33.5");
+}
+
+else{
+    circle.setAttribute("cx", "28");
+    circle.setAttribute("cy", "28");
+    circle.setAttribute("r", "28");
 }
